@@ -4,7 +4,15 @@ import Tts from 'react-native-tts';
 
 import { View, Text, TouchableOpacity } from 'react-native';
 
+import steps_json from '../../constants/rescue_steps.json';
+
 class Rescue extends React.Component {
+
+    steps = steps_json;
+
+    state = {
+        currentStep: steps["1"]
+    }
 
     constructor() {
 
@@ -18,6 +26,7 @@ class Rescue extends React.Component {
     componentDidMount() {
         Tts.speak('Przystąp do akcji ratunkowej');
         Tts.speak('Sterowanie aplikacją odbywa się poprzez komendy głosowe');
+        Tts.speak('Powiedz dalej aby przejść do następnego kroku lub powtórz, aby powtórzyć aktualny.');
         Voice.start('pl-PL');
     }
 
@@ -31,27 +40,51 @@ class Rescue extends React.Component {
 
     onSpeechResultsHandler(e) {
 
-        const text = typeof e.value === 'string' ? e.value.toLowerCase() : '';
+        const text = typeof e.value[0] === 'string' ? e.value[0].toLowerCase() : '';
 
-        if (text.includes('dalej')) {
-            this.nextStep()
+        const answers = Object.keys(this.state.currentStep.options);
+
+        if (text.includes('powtórz')) {
+            this.repeatStep()
         }
-        else if (text.includes('powtórz')) {
 
-        }
-        else if (text.includes('stop')) {
-
-        }
-        else if (text.includes('tak')) {
-
-        }
-        else if (text.includes('nie')) {
-
+        for (let answer in answers) {
+            if (text.includes(answer)) {
+                this.nextStep(answer)
+            }
         }
     }
 
-    nextStep = () => {
-        console.log('next')
+    speakCurrentStep = () => {
+
+        if (typeof this.state.currentStep.text === 'Array') {
+
+            for (let text in this.state.currentStep.text) {
+                Tts.speak(text);
+            }
+        }
+        else {
+            Tts.speak(this.state.currentStep.text);
+        }
+    }
+
+    repeatStep = () => {
+
+        if (this.state.currentStep !== null) {
+            this.speakCurrentStep();
+        }
+    }
+
+    nextStep = (step) => {
+
+        if (this.steps[step]) {
+            this.setState({ currentStep: this.steps[step] }), () => {
+                this.speakCurrentStep();
+            };
+        }
+        else {
+            this.repeatStep();
+        }
     }
 
     render() {
