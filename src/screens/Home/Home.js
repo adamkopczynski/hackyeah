@@ -8,15 +8,15 @@ import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 class Home extends React.Component {
 
-  state = {
-    position: null
-  }
+    state = {
+        position: null
+    }
 
     componentDidMount() {
-      this.hasLocationPermission();
-      this.getLocation();
+        this.hasLocationPermission();
+        this.getLocation();
 
-      Tts.speak(CommandsJSON["Day"]["1"]);
+        // Tts.speak(CommandsJSON["Day"]["1"]);
     }
 
     render() {
@@ -48,7 +48,7 @@ class Home extends React.Component {
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.accidentBtn} onPress={() => navigation.navigate('Rescue')}>
+                        <TouchableOpacity style={styles.accidentBtn} onPress={() => navigation.navigate('Call')}>
                             <Text style={{ color: '#fff', fontSize: 30 }}>
                                 WYPADEK
                             </Text>
@@ -87,7 +87,7 @@ class Home extends React.Component {
         return false;
     }
 
-    getWeather(){
+    getWeather() {
 
         // Construct the API url to call
         let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.position.latitude + '&lon=' + this.state.position.longitude + '&units=metric&appid=709d50934b037b56a091b604fc0f2de8';
@@ -95,13 +95,13 @@ class Home extends React.Component {
 
         // Call the API, and set the state of the weather forecast
         fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            this.setState((prevState, props) => ({
-                forecast: data
-        }));
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                this.setState((prevState, props) => ({
+                    forecast: data
+                }));
+            })
     }
 
     getLocation = async () => {
@@ -119,7 +119,7 @@ class Home extends React.Component {
                     };
 
                     this.setState({ position, loading: false }, () => {
-                      this.getWeather();
+                        this.getWeather();
                     });
 
                 },
