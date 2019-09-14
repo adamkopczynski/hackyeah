@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //Screens 
 import Home from '../screens/Home/Home';
 import Map from '../screens/Map/Map';
+import Rescue from '../screens/Rescue/Rescue';
 
 const HomeStack = createStackNavigator({
     Home: {
@@ -26,9 +27,19 @@ const MapStack = createStackNavigator({
     }
 });
 
+const RescueStack = createStackNavigator({
+    Rescue: {
+        screen: Rescue,
+        navigationOptions: {
+            header: null
+        }
+    }
+});
+
 const TabNavigator = createBottomTabNavigator({
     Home: HomeStack,
-    Map: MapStack
+    Map: MapStack,
+    Rescue: RescueStack
     // Profile: ProfileStack
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -41,6 +52,9 @@ const TabNavigator = createBottomTabNavigator({
                 iconName = `ios-home`;
             } else if (routeName === 'Map') {
                 iconName = `ios-map`;
+            }
+            else if (routeName === 'Rescue') {
+                iconName = `ios-heart`;
             }
 
             // You can return any component that you like here!
