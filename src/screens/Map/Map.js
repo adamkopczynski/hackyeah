@@ -4,9 +4,7 @@ import {
     View,
     Text,
     Dimensions,
-    TouchableOpacity,
     Platform,
-    Alert,
     ToastAndroid,
     PermissionsAndroid
 } from 'react-native';
@@ -14,9 +12,12 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 
 import MapView, {
-    ProviderPropType
+    ProviderPropType,
+    PROVIDER_GOOGLE
 } from 'react-native-maps';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import AEDMarker from '../../components/map/AEDMarker/AEDMarker';
+import OrlenMarker from '../../components/map/OrlenMarker/OrlenMarker';
 
 const screen = Dimensions.get('window');
 
@@ -30,12 +31,24 @@ class Map extends React.Component {
         this.state = {
             location: null,
             latitudeDelta: LATITUDE_DELTA,
-            zoom: 5
+            zoom: 5,
+            aedDevices: [],
+            stations: []
         };
     }
 
     componentDidMount() {
         this.getLocation();
+    }
+
+    fetchStations = (location) => {
+        fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=1500&keyword=orlen&key=AIzaSyBf12FMTxq11AplW26JieM4NmKOnntyqTQ`)
+            .then(res => res.json())
+            .then((json) => {
+                this.setState({
+                    stations: json.results
+                })
+            })
     }
 
     hasLocationPermission = async () => {
@@ -82,6 +95,7 @@ class Map extends React.Component {
                     };
 
                     this.setState({ location: position, region, loading: false });
+                    this.fetchStations(position.coords);
                 },
                 (error) => {
                     this.setState({ location: error, loading: false });
@@ -92,29 +106,13 @@ class Map extends React.Component {
         });
     }
 
-    handleZoomIn = () => {
-        this.setState(prevState => ({
-            zoom: prevState.zoom + 1,
-            latitudeDelta: prevState.latitudeDelta / 2
-        }));
-    }
-
-    handleZoomOut = () => {
-        this.setState(prevState => ({
-            zoom: prevState.zoom - 1,
-            latitudeDelta: prevState.latitudeDelta * 2
-        }));
-    }
-
     onRegionChange = (region) => {
         this.setState({ region });
     }
 
     render() {
 
-        const events = this.props.events;
-
-        //TODO: followsUserLocation={true}
+        const { aedDevices, stations } = this.state;
 
         return (
             <View style={styles.container}>
@@ -122,12 +120,15 @@ class Map extends React.Component {
                     !this.state.region ?
                         <Text>Loading...</Text> :
                         <MapView
+                            provider={PROVIDER_GOOGLE}
                             style={styles.map}
                             initialRegion={this.state.region}
                             showsMyLocationButton={true}
                             showsUserLocation={true}
                             zoomControlEnabled
                         >
+                            {aedDevices.map(device => <AEDMarker location={device.location} />)}
+                            {stations.map(station => <OrlenMarker location={station.geometry.location} />)}
                         </MapView>
                 }
 
