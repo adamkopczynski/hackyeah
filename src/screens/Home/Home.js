@@ -17,6 +17,9 @@ class Home extends React.Component {
       this.getLocation();
 
       Tts.speak(CommandsJSON["Day"]["1"]);
+      Tts.speak(CommandsJSON["Day"]["2"]);
+      Tts.speak(CommandsJSON["Day"]["3"]);
+      Tts.speak(CommandsJSON["Day"]["4"]);
     }
 
     render() {

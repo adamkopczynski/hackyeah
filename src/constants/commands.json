@@ -1,15 +1,20 @@
 {
   "Day" : {
-    "1": "Zatrzymaj się, sprawdź czy jesteś w bezpiecznym miejscu, włącz światła awaryjne, zaciągnij hamulec ręczny",
-    "2" : "Załuż kamizelkę odblaskową",
+    "1": "Zatrzymaj się",
+    "2": "sprawdź czy jesteś w bezpiecznym miejscu",
+    "3": "włącz światła awaryjne, zaciągnij hamulec ręczny",
+    "4" : "Załuż kamizelkę odblaskową",
     "autostrada" : "Ustaw trójkąt w odległości 100 metrów od samochodu.",
     "poza_obszarem" : "Ustaw trójkąt w odległości 50 metrów od samochodu.",
     "miasto": "Ustaw trójkąt w odległości 1 metra od samochodu. Jeżeli wypadek jest za wzniesieniem lub zakrętem, trójkąt ustaw przed nim."
   },
 
   "Night" : {
-    "1": "Zatrzymaj się, oświetl reflektorami miejsce wypadku, włącz światła awaryjne, zaciągnij hamulec ręczny",
-    "2" : "Załuż kamizelkę odblaskową",
+    "1": "Zatrzymaj się",
+    "2": "oświetl reflektorami miejsce wypadku",
+    "3": "włącz światła awaryjne",
+    "4": "zaciągnij hamulec ręczny",
+    "5": "Załuż kamizelkę odblaskową",
     "autostrada" : "Ustaw trójkąt w odległości 100 metrów od samochodu.",
     "poza_obszarem" : "Ustaw trójkąt w odległości 50 metrów od samochodu.",
     "miasto": "Ustaw trójkąt w odległości 1 metra od samochodu. Jeżeli wypadek jest za wzniesieniem lub zakrętem, trójkąt ustaw przed nim."

@@ -8,6 +8,7 @@ import AppNavigation from './src/navigation/AppNavigation';
 import { createAppContainer } from 'react-navigation';
 
 Tts.setDefaultLanguage('pl-PL');
+Tts.setDefaultRate(0.40);
 
 if (Platform.OS === 'ios') {
   Geolocation.setRNConfiguration({
