@@ -1,5 +1,6 @@
 import React from 'react';
 import Voice from 'react-native-voice';
+import Tts from 'react-native-tts';
 
 import { View, Text, TouchableOpacity } from 'react-native';
 
@@ -15,6 +16,8 @@ class Rescue extends React.Component {
     }
 
     componentDidMount() {
+        Tts.speak('Przystąp do akcji ratunkowej');
+        Tts.speak('Sterowanie aplikacją odbywa się poprzez komendy głosowe');
         Voice.start('pl-PL');
     }
 
@@ -28,7 +31,7 @@ class Rescue extends React.Component {
 
     onSpeechResultsHandler(e) {
 
-        const text = e.value && e.value.toLowerCase();
+        const text = typeof e.value === 'string' ? e.value.toLowerCase() : '';
 
         if (text.includes('dalej')) {
             this.nextStep()
