@@ -1,12 +1,20 @@
 import React from 'react';
+import Tts from 'react-native-tts';
 
 import { SafeAreaView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 class Home extends React.Component {
 
+    componentDidMount() {
+        Tts.setDefaultLanguage('pl-PL');
+        Tts.speak('Cześć, świecie!');
+    }
+
     render() {
 
         const { navigation } = this.props;
+
+
 
         return (
             <SafeAreaView style={styles.wrapper}>
