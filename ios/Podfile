@@ -2,6 +2,8 @@ platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'hackyeah' do
+
+  rn_maps_path = '../node_modules/react-native-maps'
   # Pods for hackyeah
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/React'
@@ -26,6 +28,9 @@ target 'hackyeah' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'react-native-google-maps', path: rn_maps_path 
+  pod 'GoogleMaps' 
+  pod 'Google-Maps-iOS-Utils'
 
   target 'hackyeahTests' do
     inherit! :search_paths
