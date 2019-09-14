@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from '../screens/Home/Home';
 import Map from '../screens/Map/Map';
 import Rescue from '../screens/Rescue/Rescue';
+import Call from '../screens/Call/Call';
 
 const HomeStack = createStackNavigator({
     Home: {
@@ -28,6 +29,12 @@ const MapStack = createStackNavigator({
 });
 
 const RescueStack = createStackNavigator({
+    Call: {
+        screen: Call,
+        navigationOptions: {
+            header: null
+        }
+    },
     Rescue: {
         screen: Rescue,
         navigationOptions: {
