@@ -93,7 +93,7 @@ class Home extends React.Component {
     getWeather() {
 
         // Construct the API url to call
-        let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.position.latitude + '&lon=' + this.state.position.longitude + '&units=metric&appid=709d50934b037b56a091b604fc0f2de8';
+        let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.position.latitude + '&lon=' + this.state.position.longitude + '&appid=709d50934b037b56a091b604fc0f2de8&units=metric';
 
 
         // Call the API, and set the state of the weather forecast
@@ -121,7 +121,7 @@ class Home extends React.Component {
                         longitude: position.coords.longitude
                     };
 
-                    this.setState({ position, loading: false }, () => {
+                    this.setState({ position: region, loading: false }, () => {
                         this.getWeather();
                     });
 
