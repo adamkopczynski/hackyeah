@@ -15,11 +15,19 @@ class Home extends React.Component {
     componentDidMount() {
         this.hasLocationPermission();
         this.getLocation();
-
-      Tts.speak(CommandsJSON["Day"]["1"]);
-      Tts.speak(CommandsJSON["Day"]["2"]);
-      Tts.speak(CommandsJSON["Day"]["3"]);
-      Tts.speak(CommandsJSON["Day"]["4"]);
+      var hours = new Date().getHours();
+      if ((hours < 8) && (hours < 19)) {
+        Tts.speak(CommandsJSON["Day"]["1"]);
+        Tts.speak(CommandsJSON["Day"]["2"]);
+        Tts.speak(CommandsJSON["Day"]["3"]);
+        Tts.speak(CommandsJSON["Day"]["4"]);
+      } else {
+        Tts.speak(CommandsJSON["Night"]["1"]);
+        Tts.speak(CommandsJSON["Night"]["2"]);
+        Tts.speak(CommandsJSON["Night"]["3"]);
+        Tts.speak(CommandsJSON["Night"]["4"]);
+        Tts.speak(CommandsJSON["Night"]["5"]);
+      }
     }
 
     render() {
