@@ -28,7 +28,7 @@ class Rescue extends React.Component {
 
     onSpeechResultsHandler(e) {
 
-        const text = e.value.toLowerCase();
+        const text = e.value && e.value.toLowerCase();
 
         if (text.includes('dalej')) {
             this.nextStep()

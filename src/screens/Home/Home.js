@@ -32,7 +32,7 @@ class Home extends React.Component {
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.accidentBtn} onPress={() => navigation.navigate('Map')}>
+                        <TouchableOpacity style={styles.accidentBtn} onPress={() => navigation.navigate('Rescue')}>
                             <Text style={{ color: '#fff', fontSize: 30 }}>
                                 WYPADEK
                             </Text>
