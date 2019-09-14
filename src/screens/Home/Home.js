@@ -1,13 +1,21 @@
 import React from 'react';
 import Tts from 'react-native-tts';
+import Geolocation from '@react-native-community/geolocation';
+import CommandsJSON from '../../constants/commands.json';
 
 import { SafeAreaView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 class Home extends React.Component {
 
+  state = {
+    position: null
+  }
+
     componentDidMount() {
-        Tts.setDefaultLanguage('pl-PL');
-        Tts.speak('Cześć, świecie!');
+      this.hasLocationPermission();
+      this.getLocation();
+
+      Tts.speak(CommandsJSON["Day"]["1"]);
     }
 
     render() {
@@ -25,6 +33,78 @@ class Home extends React.Component {
                 </TouchableOpacity>
             </SafeAreaView>
         )
+    }
+
+    hasLocationPermission = async () => {
+        if (Platform.OS === 'ios' ||
+            (Platform.OS === 'android' && Platform.Version < 23)) {
+            return true;
+        }
+
+        const hasPermission = await PermissionsAndroid.check(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        );
+
+        if (hasPermission) return true;
+
+        const status = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        );
+
+        if (status === PermissionsAndroid.RESULTS.GRANTED) return true;
+
+        if (status === PermissionsAndroid.RESULTS.DENIED) {
+            ToastAndroid.show('Location permission denied by user.', ToastAndroid.LONG);
+        } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+            ToastAndroid.show('Location permission revoked by user.', ToastAndroid.LONG);
+        }
+
+        return false;
+    }
+
+    getWeather(){
+
+        // Construct the API url to call
+        let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.position.latitude + '&lon=' + this.state.position.longitude + '&units=metric&appid=709d50934b037b56a091b604fc0f2de8';
+
+
+        // Call the API, and set the state of the weather forecast
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            this.setState((prevState, props) => ({
+                forecast: data
+        }));
+        })
+    }
+
+    getLocation = async () => {
+        const hasLocationPermission = await this.hasLocationPermission();
+
+        if (!hasLocationPermission) return;
+
+        this.setState({ loading: true }, () => {
+            Geolocation.getCurrentPosition(
+                (position) => {
+
+                    const region = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+
+                    this.setState({ position, loading: false }, () => {
+                      this.getWeather();
+                    });
+
+                },
+                (error) => {
+                    this.setState({ location: error, loading: false });
+                    console.log(error);
+                },
+                { enableHighAccuracy: true, timeout: 15000, distanceFilter: 50, forceRequestLocation: true }
+            );
+        });
     }
 }
 
