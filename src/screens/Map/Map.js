@@ -32,7 +32,12 @@ class Map extends React.Component {
             location: null,
             latitudeDelta: LATITUDE_DELTA,
             zoom: 5,
-            aedDevices: [],
+            aedDevices: [{
+                location: {
+                    longitude: 21.1108,
+                    latitude: 52.2369
+                }
+            }],
             stations: []
         };
     }
