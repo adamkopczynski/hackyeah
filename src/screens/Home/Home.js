@@ -3,8 +3,9 @@ import Tts from 'react-native-tts';
 import Geolocation from '@react-native-community/geolocation';
 import CommandsJSON from '../../constants/commands.json';
 
-import { SafeAreaView, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 
+import styles from './styles';
 class Home extends React.Component {
 
   state = {
@@ -25,13 +26,37 @@ class Home extends React.Component {
 
 
         return (
-            <SafeAreaView style={styles.wrapper}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Map')}>
-                    <Text style={{ color: '#fff', fontSize: 30 }}>
-                        ALERT
-                    </Text>
-                </TouchableOpacity>
-            </SafeAreaView>
+            <View style={styles.page}>
+                <SafeAreaView style={{ flex: 1 }}>
+
+                    <View style={styles.wrapper}>
+                        <TouchableOpacity style={styles.button}>
+                            <Text>
+                                OPTION
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.button}>
+                            <Text>
+                                OPTION
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.button}>
+                            <Text>
+                                OPTION
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.accidentBtn} onPress={() => navigation.navigate('Map')}>
+                            <Text style={{ color: '#fff', fontSize: 30 }}>
+                                WYPADEK
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </SafeAreaView>
+            </View>
         )
     }
 
@@ -107,21 +132,6 @@ class Home extends React.Component {
         });
     }
 }
-
-const styles = StyleSheet.create({
-    button: {
-        width: 200,
-        height: 200,
-        borderRadius: 100,
-        backgroundColor: 'red',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    wrapper: {
-        flex: 1,
-        alignItems: 'center'
-    }
-})
 
 
 export default Home;
