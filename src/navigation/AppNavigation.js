@@ -1,10 +1,12 @@
 import React from 'react';
-import { createBottomTabNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //Screens 
 import Home from '../screens/Home/Home';
+import Map from '../screens/Map/Map';
 
 const HomeStack = createStackNavigator({
     Home: {
@@ -15,39 +17,41 @@ const HomeStack = createStackNavigator({
     }
 });
 
+const MapStack = createStackNavigator({
+    Map: {
+        screen: Map,
+        navigationOptions: {
+            header: null
+        }
+    }
+});
 
-// const TabNavigator = createBottomTabNavigator({
-//     Home: HomeStack,
-//     Hot: HotStack,
-//     FindMe: FindMeStack,
-//     // Profile: ProfileStack
-// }, {
-//     defaultNavigationOptions: ({ navigation }) => ({
-//         tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//             const { routeName } = navigation.state;
-//             let IconComponent = Ionicons;
-//             let iconName;
+const TabNavigator = createBottomTabNavigator({
+    Home: HomeStack,
+    Map: MapStack
+    // Profile: ProfileStack
+}, {
+    defaultNavigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            const { routeName } = navigation.state;
+            let IconComponent = Ionicons;
+            let iconName;
 
-//             if (routeName === 'Home') {
-//                 iconName = `ios-home`;
-//             } else if (routeName === 'Hot') {
-//                 iconName = `ios-flame`;
-//             } else if (routeName === 'Profile') {
-//                 iconName = `ios-person`;
-//             }
-//             else if (routeName === 'FindMe') {
-//                 iconName = `ios-map`;
-//             }
+            if (routeName === 'Home') {
+                iconName = `ios-home`;
+            } else if (routeName === 'Map') {
+                iconName = `ios-map`;
+            }
 
-//             // You can return any component that you like here!
-//             return <IconComponent name={iconName} size={25} color={tintColor} />;
-//         },
-//     }),
-//     tabBarOptions: {
-//         activeTintColor: '#2ecc71',
-//         inactiveTintColor: 'gray',
-//     },
-// });
+            // You can return any component that you like here!
+            return <IconComponent name={iconName} size={25} color={tintColor} />;
+        },
+    }),
+    tabBarOptions: {
+        activeTintColor: '#2ecc71',
+        inactiveTintColor: 'gray',
+    },
+});
 
 // const AuthStack = createStackNavigator({
 //     Login: {
@@ -73,7 +77,7 @@ const HomeStack = createStackNavigator({
 
 export default createAppContainer(createSwitchNavigator(
     {
-        Home: HomeStack,
+        App: TabNavigator
         // Auth: AuthStack,
         // AuthLoading: AuthLoadingScreen,
         // ImageProcessingStack: ImageProcessing
