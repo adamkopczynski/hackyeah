@@ -2,7 +2,7 @@ import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Image } from 'react-native';
 
 //Screens 
 import Home from '../screens/Home/Home';
@@ -11,6 +11,12 @@ import Rescue from '../screens/Rescue/Rescue';
 import Call from '../screens/Call/Call';
 import Prepare from '../screens/Prepare/Prepare';
 import Learn from '../screens/Learn/Learn';
+
+//Icons
+import Pamietnik from '../assets/icons/pamietnik.png';
+import Survival from '../assets/icons/survival_kit.png';
+import Settings from '../assets/icons/settings.png';
+import LearnIcon from '../assets/icons/first-aid-kit.png';
 
 const HomeStack = createStackNavigator({
     Home: {
@@ -55,28 +61,31 @@ const RescueStack = createStackNavigator({
 });
 
 const TabNavigator = createBottomTabNavigator({
-    Home: HomeStack,
-    Map: MapStack,
-    Learn: LearnStack
+    Dziennik: HomeStack,
+    Nauka: LearnStack,
+    SurvivalKit: MapStack,
+    Ustawienia: HomeStack,
     // Profile: ProfileStack
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
             const { routeName } = navigation.state;
-            let IconComponent = Ionicons;
-            let iconName;
+            let source;
 
-            if (routeName === 'Home') {
-                iconName = `ios-home`;
-            } else if (routeName === 'Map') {
-                iconName = `ios-map`;
+            if (routeName === 'Dziennik') {
+                source = Pamietnik;
+            } else if (routeName === 'Nauka') {
+                source = LearnIcon;
             }
-            else if (routeName === 'Rescue') {
-                iconName = `ios-heart`;
+            else if (routeName === 'SurvivalKit') {
+                source = Survival;
+            }
+            else if (routeName === 'Ustawienia') {
+                source = Settings;
             }
 
             // You can return any component that you like here!
-            return <IconComponent name={iconName} size={25} color={tintColor} />;
+            return <Image source={source} style={{ width: 25, height: 25 }} />;
         },
     }),
     tabBarOptions: {

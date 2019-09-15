@@ -1,8 +1,12 @@
 import React from 'react';
 import Geolocation from '@react-native-community/geolocation';
-import MdIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Foundation from 'react-native-vector-icons/Foundation';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from '../../components/common/Icon';
+
+import DoctorIcon from '../../assets/icons/doctor.png';
+import AidKidIcon from '../../assets/icons/first-aid-kit.png';
+import HandIcon from '../../assets/icons/hand.png';
+import PhoneIcon from '../../assets/icons/phone-call.png';
+import PinIcon from '../../assets/icons/map.png';
 
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 
@@ -31,41 +35,41 @@ class Home extends React.Component {
 
                     <View style={styles.wrapper}>
                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Prepare')}>
-                            <MdIcons name='hand-left' style={{ fontSize: 30, marginHorizontal: 20 }} />
+                            <Icon source={HandIcon} style={{ marginHorizontal: 20 }} />
                             <Text style={styles.buttonText}>
                                 Opanuj stres
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.button}>
-                            <MdIcons name='human-handsup' style={{ fontSize: 30, marginHorizontal: 20 }} />
+                            <Icon source={DoctorIcon} style={{ marginHorizontal: 20 }} />
                             <Text style={styles.buttonText}>
-                                Bohaterzy ORLEN
+                                Bohaterowie ORLEN
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Map')}>
-                            <SimpleLineIcons name='location-pin' style={{ fontSize: 30, marginHorizontal: 20 }} />
+                            <Icon source={PinIcon} style={{ marginHorizontal: 20 }} />
                             <Text style={styles.buttonText}>
                                 Mapa NFZ i AED
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Rescue')}>
-                            <Foundation name='first-aid' style={{ fontSize: 30, marginHorizontal: 20 }} />
+                            <Icon source={AidKidIcon} style={{ marginHorizontal: 20 }} />
                             <Text style={styles.buttonText}>
                                 Pierwsza pomoc
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={[styles.button, styles.callButton]} onPress={() => navigation.navigate('Call')}>
-                            <MdIcons name='phone' color='#E72D2D' style={{ fontSize: 30, marginHorizontal: 20 }} />
+                            <Icon source={PhoneIcon} style={{ marginHorizontal: 20 }} />
                             <Text style={[styles.buttonText, styles.callButtonText]}>
                                 Zadzwoń 112
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.accidentBtn} onPress={() => navigation.navigate('Call')}>
+                        <TouchableOpacity style={styles.accidentBtn} onPress={() => navigation.navigate('Prepare')}>
                             <Text style={{ color: '#fff', fontSize: 30 }}>
                                 WYPADEK
                             </Text>
