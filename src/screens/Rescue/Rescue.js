@@ -2,7 +2,7 @@ import React from 'react';
 import Voice from 'react-native-voice';
 import Tts from 'react-native-tts';
 
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import steps from '../../constants/rescue_steps';
@@ -29,6 +29,12 @@ class Rescue extends React.Component {
         Tts.speak('Powiedz dalej aby przejść do następnego kroku lub powtórz, aby powtórzyć aktualny.');
         this.speakCurrentStep();
         Voice.start('pl-PL');
+
+        for (let i = 1; i < 4; i++) {
+            setTimeout(() => {
+                this.nextStep();
+            }, i * 5000 + 12000)
+        }
     }
 
     onSpeechStartHandler(e) {
@@ -76,14 +82,16 @@ class Rescue extends React.Component {
 
     render() {
 
-        const step = steps[this.state.currentStep].text;
+        const stepImage = steps[this.state.currentStep].image;
+        const options = steps[this.state.currentStep].options;
 
         return (
             <View style={styles.container}>
-                <View style={{ flex: 1, borderRadius: 10, margin: 10, width: '100%' }}>
-                    <Text>
-                        {step}
-                    </Text>
+                <View style={{ flex: 1, borderRadius: 10, margin: 10, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                    {stepImage && <Image source={stepImage} />}
+                    <View style={{ flexDirection: 'row', padding: 10 }}>
+                        {options && options.map(option => <Image source={option} style={{ flex: 1 }} />)}
+                    </View>
                 </View>
                 <View style={{ marginBottom: 20, flexDirection: 'row' }}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>

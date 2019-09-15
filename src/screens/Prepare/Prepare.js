@@ -7,6 +7,10 @@ import CommandsJSON from '../../constants/commands.json';
 
 import styles from './styles';
 
+//images
+import step1 from '../../assets/images/111.png';
+import step2 from '../../assets/images/222.png';
+import step3 from '../../assets/images/333.png';
 class Prepare extends React.Component {
 
     componentDidMount() {
@@ -29,38 +33,11 @@ class Prepare extends React.Component {
                             <Text style={styles.cancelText}>Anuluj</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.item}>
-                        <View style={styles.imageWrapper}>
-                            <Image source={{ uri: 'https://image.shutterstock.com/image-vector/car-logo-icon-emblem-design-260nw-473088037.jpg' }} style={{ width: 150, height: 150, borderRadius: 75 }} />
-                        </View>
-                        <View style={styles.textWrapper}>
-                            <Text style={styles.text}>
-                                1. Zatrzymaj auto
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={[styles.item, { flexDirection: 'row-reverse' }]}>
-                        <View style={styles.imageWrapper}>
-                            <Image source={{ uri: 'https://image.shutterstock.com/image-vector/car-logo-icon-emblem-design-260nw-473088037.jpg' }} style={{ width: 150, height: 150, borderRadius: 75 }} />
-                        </View>
-                        <View style={styles.textWrapper}>
-                            <Text style={styles.text}>
-                                2. Załóż kamizelkę
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={styles.item}>
-                        <View style={styles.imageWrapper}>
-                            <Image source={{ uri: 'https://image.shutterstock.com/image-vector/car-logo-icon-emblem-design-260nw-473088037.jpg' }} style={{ width: 150, height: 150, borderRadius: 75 }} />
-                        </View>
-                        <View style={styles.textWrapper}>
-                            <Text style={styles.text}>
-                                3. Ustaw trójkąt
-                            </Text>
-                        </View>
-                    </View>
+                    <Image source={step1} style={{ flex: 1, marginVertical: 10 }} />
+                    <Image source={step3} style={{ flex: 1, marginVertical: 10 }} />
+                    <Image source={step2} style={{ flex: 1, marginVertical: 10 }} />
                 </View>
-                <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate('Rescue')}>
+                <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate('Call')}>
                     <MdIcons name='voice' style={{ fontSize: 40 }} color='#8b93a0' />
                     <Text style={{ color: '#8b93a0', fontSize: 24, marginHorizontal: 20 }}>"Dalej"</Text>
                     <Ionicons name='ios-arrow-round-forward' style={{ fontSize: 55 }} color='#8b93a0' />
