@@ -33,21 +33,33 @@ class Home extends React.Component {
                 <SafeAreaView style={{ flex: 1 }}>
 
                     <View style={styles.wrapper}>
-                        <TouchableOpacity style={styles.button}>
-                            <Text>
-                                OPTION
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Prepare')}>
+                            <Text style={styles.buttonText}>
+                                Powstrzymaj chaos
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.button}>
-                            <Text>
-                                OPTION
+                            <Text style={styles.buttonText}>
+                                Bohaterzy ORLEN
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.button}>
-                            <Text>
-                                OPTION
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Map')}>
+                            <Text style={styles.buttonText}>
+                                Mapa NFZ i AED
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Rescue')}>
+                            <Text style={styles.buttonText}>
+                                Pierwsza pomoc
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={[styles.button, styles.callButton]} onPress={() => navigation.navigate('Call')}>
+                            <Text style={[styles.buttonText, styles.callButtonText]}>
+                                Zadzwoń 112
                             </Text>
                         </TouchableOpacity>
 

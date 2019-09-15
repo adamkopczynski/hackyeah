@@ -9,6 +9,7 @@ import Home from '../screens/Home/Home';
 import Map from '../screens/Map/Map';
 import Rescue from '../screens/Rescue/Rescue';
 import Call from '../screens/Call/Call';
+import Prepare from '../screens/Prepare/Prepare';
 
 const HomeStack = createStackNavigator({
     Home: {
@@ -29,8 +30,8 @@ const MapStack = createStackNavigator({
 });
 
 const RescueStack = createStackNavigator({
-    Call: {
-        screen: Call,
+    Prepare: {
+        screen: Prepare,
         navigationOptions: {
             header: null
         }
@@ -40,13 +41,12 @@ const RescueStack = createStackNavigator({
         navigationOptions: {
             header: null
         }
-    }
+    },
 });
 
 const TabNavigator = createBottomTabNavigator({
     Home: HomeStack,
-    Map: MapStack,
-    Rescue: RescueStack
+    Map: MapStack
     // Profile: ProfileStack
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -98,7 +98,11 @@ const TabNavigator = createBottomTabNavigator({
 
 export default createAppContainer(createSwitchNavigator(
     {
-        App: TabNavigator
+        App: TabNavigator,
+        Call: {
+            screen: Call
+        },
+        RescueStack
         // Auth: AuthStack,
         // AuthLoading: AuthLoadingScreen,
         // ImageProcessingStack: ImageProcessing
