@@ -4,14 +4,12 @@ import Tts from 'react-native-tts';
 
 import { View, Text, TouchableOpacity } from 'react-native';
 
-import steps_json from '../../constants/rescue_steps.json';
+import steps from '../../constants/rescue_steps';
 
 class Rescue extends React.Component {
 
-    steps = steps_json;
-
     state = {
-        currentStep: steps["1"]
+        currentStep: 0
     }
 
     constructor() {
@@ -27,6 +25,7 @@ class Rescue extends React.Component {
         Tts.speak('Przystąp do akcji ratunkowej');
         Tts.speak('Sterowanie aplikacją odbywa się poprzez komendy głosowe');
         Tts.speak('Powiedz dalej aby przejść do następnego kroku lub powtórz, aby powtórzyć aktualny.');
+        this.speakCurrentStep();
         Voice.start('pl-PL');
     }
 
@@ -42,29 +41,41 @@ class Rescue extends React.Component {
 
         const text = typeof e.value[0] === 'string' ? e.value[0].toLowerCase() : '';
 
-        const answers = Object.keys(this.state.currentStep.options);
+        console.log(e)
 
-        if (text.includes('powtórz')) {
-            this.repeatStep()
-        }
+        const currentStep = steps[this.state.currentStep];
+        // const answers = Object.keys(currentStep.options);
 
-        for (let answer in answers) {
-            if (text.includes(answer)) {
-                this.nextStep(answer)
-            }
-        }
+        // console.log(answers.includes('dalej'))
+
+        // if (text.includes('powtórz')) {
+        //     this.repeatStep()
+        // }
+
+        // if (text.includes('dalej') && answers.includes('dalej')) {
+        //     this.nextStep(currentStep.options['dalej'])
+        // }
+
+        // if (text.includes('tak') && answers.includes('tak')) {
+        //     this.nextStep(currentStep.options['tak'])
+        // }
+
+        // if (text.includes('nie') && answers.includes('nie')) {
+        //     this.nextStep(currentStep.options['nie'])
+        // }
+
     }
 
     speakCurrentStep = () => {
 
-        if (typeof this.state.currentStep.text === 'Array') {
+        if (typeof steps[this.state.currentStep].text !== 'string') {
 
-            for (let text in this.state.currentStep.text) {
-                Tts.speak(text);
+            for (let i = 0; i < steps[this.state.currentStep].text.length; i++) {
+                Tts.speak(steps[this.state.currentStep].text[i]);
             }
         }
         else {
-            Tts.speak(this.state.currentStep.text);
+            Tts.speak(steps[this.state.currentStep].text);
         }
     }
 
@@ -75,24 +86,22 @@ class Rescue extends React.Component {
         }
     }
 
-    nextStep = (step) => {
+    nextStep = () => {
 
-        if (this.steps[step]) {
-            this.setState({ currentStep: this.steps[step] }), () => {
-                this.speakCurrentStep();
-            };
-        }
-        else {
-            this.repeatStep();
-        }
+        this.setState({ currentStep: this.state.currentStep + 1 }, () => {
+            this.speakCurrentStep();
+        });
     }
 
     render() {
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity onPress={this.onStartButtonPress}>
-                    <Text>Start</Text>
+                <TouchableOpacity onPress={this.nextStep}>
+                    <Text>Next</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.repeatStep}>
+                    <Text>Repeat</Text>
                 </TouchableOpacity>
             </View>
         )

@@ -8,7 +8,12 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         backgroundColor: variables.red_color,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderWidth: 6,
+        borderColor: '#fff',
+        shadowOffset: { width: 4, height: 4, },
+        shadowColor: 'black',
+        shadowOpacity: 0.15,
     },
     wrapper: {
         flex: 1,
@@ -18,15 +23,30 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '100%',
-        height: 100,
+        height: 70,
         borderRadius: 20,
         backgroundColor: '#fff',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowOffset: { width: 4, height: 4, },
+        shadowColor: 'black',
+        shadowOpacity: 0.15,
     },
     page: {
         flex: 1,
         backgroundColor: variables.light_color
+    },
+    callButton: {
+        borderWidth: 2,
+        borderColor: variables.red_color
+    },
+    buttonText: {
+        fontSize: 26,
+        color: variables.dark_color
+    },
+    callButtonText: {
+        color: variables.red_color,
+        fontWeight: 'bold'
     }
 })
 

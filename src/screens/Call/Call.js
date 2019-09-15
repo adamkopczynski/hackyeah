@@ -94,26 +94,27 @@ class Call extends React.Component {
 
         return (
             <View style={styles.wrapper}>
-                <View style={styles.numberWrapper}>
-                    <Text style={styles.number}>112</Text>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <Text style={styles.callingText}>Połączenie z 112...</Text>
                 </View>
-                <Text style={styles.callingText}>Calling!...</Text>
-                <MapView
-                    style={styles.map}
-                    provider={PROVIDER_GOOGLE}
-                    showsUserLocation={true}
-                    initialRegion={this.state.region} />
-                {
-                    this.state.region && (
-                        <View style={{ flex: 1, justifyContent: 'center' }}>
-                            <Text style={styles.coordsText}>{this.parseCoordinate(this.state.region.latitude)} N</Text>
-                            <Text style={styles.coordsText}>{this.parseCoordinate(this.state.region.longitude)} E</Text>
-                        </View>
-                    )
-                }
-                <View>
+                <View style={{ flex: 2, width: '100%' }}>
+                    <MapView
+                        style={styles.map}
+                        provider={PROVIDER_GOOGLE}
+                        showsUserLocation={true}
+                        initialRegion={this.state.region} />
+                    {
+                        this.state.region && (
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={styles.coordsText}>{this.parseCoordinate(this.state.region.latitude)} N</Text>
+                                <Text style={styles.coordsText}>{this.parseCoordinate(this.state.region.longitude)} E</Text>
+                            </View>
+                        )
+                    }
+                </View>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.cancelBtn} onPress={this.endCall}>
-                        <Ionicons name='ios-close' color='#fff' size={30} />
+                        <Ionicons name='ios-close' color='#fff' style={{ fontSize: 55 }} />
                     </TouchableOpacity>
                 </View>
             </View >
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
         paddingTop: 40,
-        backgroundColor: variables.light_color
+        backgroundColor: variables.dark_color
     },
     numberWrapper: {
         width: 50,
@@ -144,9 +145,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     callingText: {
-        fontSize: 40,
+        fontSize: 30,
         fontWeight: 'bold',
-        marginBottom: 10
+        marginBottom: 10,
+        color: '#fff'
     },
     map: {
         height: 200,
@@ -154,16 +156,17 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     cancelBtn: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 80,
+        height: 80,
+        borderRadius: 40,
         backgroundColor: variables.red_color,
         justifyContent: 'center',
         alignItems: 'center'
     },
     coordsText: {
-        fontSize: 20,
-        fontWeight: 'bold'
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#fff'
     }
 })
 
