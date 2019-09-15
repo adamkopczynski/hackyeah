@@ -4,6 +4,8 @@ import { View, Image, Text } from 'react-native';
 
 function LessonItem(props) {
 
+    const { title } = props;
+
     return (
         <View
             style={{
@@ -20,7 +22,7 @@ function LessonItem(props) {
                 shadowOpacity: 0.15
             }}>
             <View style={{ flex: 1, height: '100%', justifyContent: 'flex-start' }}>
-                <Text style={{ fontSize: 20, color: '#222' }}>Nazwa lekcji</Text>
+                <Text style={{ fontSize: 20, color: '#222' }}>{title}</Text>
                 <Text style={{ fontSize: 14, color: '#ccc' }}>10 pkt</Text>
             </View>
             <View style={{ flex: 1, padding: 20 }}>

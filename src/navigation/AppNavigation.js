@@ -11,6 +11,7 @@ import Rescue from '../screens/Rescue/Rescue';
 import Call from '../screens/Call/Call';
 import Prepare from '../screens/Prepare/Prepare';
 import Learn from '../screens/Learn/Learn';
+import Quiz from '../screens/Quiz/Quiz';
 
 //Icons
 import Pamietnik from '../assets/icons/pamietnik.png';
@@ -30,6 +31,12 @@ const HomeStack = createStackNavigator({
 const LearnStack = createStackNavigator({
     Learn: {
         screen: Learn,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Quiz: {
+        screen: Quiz,
         navigationOptions: {
             header: null
         }
@@ -64,8 +71,7 @@ const TabNavigator = createBottomTabNavigator({
     Dziennik: HomeStack,
     Nauka: LearnStack,
     SurvivalKit: MapStack,
-    Ustawienia: HomeStack,
-    // Profile: ProfileStack
+    Ustawienia: HomeStack
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -94,27 +100,6 @@ const TabNavigator = createBottomTabNavigator({
     },
 });
 
-// const AuthStack = createStackNavigator({
-//     Login: {
-//         screen: LoginScreen,
-//         navigationOptions: {
-//             header: null
-//         }
-//     },
-//     Signup: {
-//         screen: SignupScreen,
-//         navigationOptions: {
-//             header: null
-//         }
-//     },
-//     SignupSuccess: {
-//         screen: SignupSuccessScreen,
-//         navigationOptions: {
-//             header: null
-//         }
-//     }
-// });
-
 
 export default createAppContainer(createSwitchNavigator(
     {
@@ -123,8 +108,5 @@ export default createAppContainer(createSwitchNavigator(
             screen: Call
         },
         RescueStack
-        // Auth: AuthStack,
-        // AuthLoading: AuthLoadingScreen,
-        // ImageProcessingStack: ImageProcessing
     }
 ));
