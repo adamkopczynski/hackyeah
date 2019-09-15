@@ -1,10 +1,20 @@
 import React from 'react';
+import Tts from 'react-native-tts';
 import { View, TouchableOpacity, Text, SafeAreaView, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MdIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CommandsJSON from '../../constants/commands.json';
 
 import styles from './styles';
 
 class Prepare extends React.Component {
+
+    componentDidMount() {
+        Tts.speak(CommandsJSON["Day"]["1"]);
+        Tts.speak(CommandsJSON["Day"]["2"]);
+        Tts.speak(CommandsJSON["Day"]["3"]);
+        Tts.speak(CommandsJSON["Day"]["4"]);
+    }
 
     render() {
 
@@ -50,9 +60,11 @@ class Prepare extends React.Component {
                         </View>
                     </View>
                 </View>
-                <View style={styles.footer}>
+                <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate('Rescue')}>
+                    <MdIcons name='voice' style={{ fontSize: 40 }} color='#8b93a0' />
+                    <Text style={{ color: '#8b93a0', fontSize: 24, marginHorizontal: 20 }}>"Dalej"</Text>
                     <Ionicons name='ios-arrow-round-forward' style={{ fontSize: 55 }} color='#8b93a0' />
-                </View>
+                </TouchableOpacity>
             </SafeAreaView>
         )
     }

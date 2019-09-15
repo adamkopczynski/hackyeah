@@ -3,8 +3,10 @@ import Voice from 'react-native-voice';
 import Tts from 'react-native-tts';
 
 import { View, Text, TouchableOpacity } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import steps from '../../constants/rescue_steps';
+import styles from './styles';
 
 class Rescue extends React.Component {
 
@@ -41,28 +43,7 @@ class Rescue extends React.Component {
 
         const text = typeof e.value[0] === 'string' ? e.value[0].toLowerCase() : '';
 
-        console.log(e)
-
         const currentStep = steps[this.state.currentStep];
-        // const answers = Object.keys(currentStep.options);
-
-        // console.log(answers.includes('dalej'))
-
-        // if (text.includes('powtórz')) {
-        //     this.repeatStep()
-        // }
-
-        // if (text.includes('dalej') && answers.includes('dalej')) {
-        //     this.nextStep(currentStep.options['dalej'])
-        // }
-
-        // if (text.includes('tak') && answers.includes('tak')) {
-        //     this.nextStep(currentStep.options['tak'])
-        // }
-
-        // if (text.includes('nie') && answers.includes('nie')) {
-        //     this.nextStep(currentStep.options['nie'])
-        // }
 
     }
 
@@ -95,14 +76,26 @@ class Rescue extends React.Component {
 
     render() {
 
+        const step = steps[this.state.currentStep].text;
+
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity onPress={this.nextStep}>
-                    <Text>Next</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.repeatStep}>
-                    <Text>Repeat</Text>
-                </TouchableOpacity>
+            <View style={styles.container}>
+                <View style={{ flex: 1, borderRadius: 10, margin: 10, width: '100%' }}>
+                    <Text>
+                        {step}
+                    </Text>
+                </View>
+                <View style={{ marginBottom: 20, flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
+                        <Ionicons name='ios-close' size={30} color='#fff' />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.repeatStep} style={styles.button}>
+                        <Ionicons name='ios-repeat' size={30} color='#fff' />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.nextStep} style={styles.button}>
+                        <Ionicons name='ios-arrow-round-forward' size={30} color='#fff' />
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
