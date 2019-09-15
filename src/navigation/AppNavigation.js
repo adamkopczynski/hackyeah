@@ -10,10 +10,20 @@ import Map from '../screens/Map/Map';
 import Rescue from '../screens/Rescue/Rescue';
 import Call from '../screens/Call/Call';
 import Prepare from '../screens/Prepare/Prepare';
+import Learn from '../screens/Learn/Learn';
 
 const HomeStack = createStackNavigator({
     Home: {
         screen: Home,
+        navigationOptions: {
+            header: null
+        }
+    }
+});
+
+const LearnStack = createStackNavigator({
+    Learn: {
+        screen: Learn,
         navigationOptions: {
             header: null
         }
@@ -30,23 +40,24 @@ const MapStack = createStackNavigator({
 });
 
 const RescueStack = createStackNavigator({
-    Prepare: {
-        screen: Prepare,
-        navigationOptions: {
-            header: null
-        }
-    },
     Rescue: {
-        screen: Rescue,
-        navigationOptions: {
-            header: null
-        }
+        screen: Rescue
+    },
+    Prepare: {
+        screen: Prepare
+    },
+}, {
+    headerMode: 'none',
+    defaultNavigationOptions: {
+        gestureEnabled: true,
+        cardOverlayEnabled: true,
     },
 });
 
 const TabNavigator = createBottomTabNavigator({
     Home: HomeStack,
-    Map: MapStack
+    Map: MapStack,
+    Learn: LearnStack
     // Profile: ProfileStack
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -69,7 +80,7 @@ const TabNavigator = createBottomTabNavigator({
         },
     }),
     tabBarOptions: {
-        activeTintColor: '#2ecc71',
+        activeTintColor: '#222',
         inactiveTintColor: 'gray',
     },
 });

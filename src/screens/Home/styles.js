@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         shadowOffset: { width: 4, height: 4, },
         shadowColor: 'black',
-        shadowOpacity: 0.15,
+        shadowOpacity: 0.15
     },
     wrapper: {
         flex: 1,
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 4, height: 4, },
         shadowColor: 'black',
         shadowOpacity: 0.15,
+        flexDirection: 'row'
     },
     page: {
         flex: 1,
@@ -42,7 +43,9 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 26,
-        color: variables.dark_color
+        color: variables.dark_color,
+        flex: 1,
+        textAlign: 'center'
     },
     callButtonText: {
         color: variables.red_color,
